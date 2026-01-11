@@ -6,7 +6,7 @@ import { content } from "@/constants/content";
 
 export function Hero() {
     return (
-        <section className="relative h-screen w-full flex items-center justify-center overflow-hidden">
+        <section className="relative h-screen w-full flex items-center justify-center overflow-hidden -mt-20 bg-gray-900">
             {/* Background Image Placeholder */}
             <div
                 className="absolute inset-0 bg-cover bg-center z-0"

@@ -23,7 +23,7 @@ export default function FacilitiesPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {facilityImages.map((item, idx) => (
                     <Card key={idx} className="overflow-hidden border-none shadow-lg group">
-                        <div className="relative h-64 w-full overflow-hidden">
+                        <div className="relative h-96 w-full overflow-hidden">
                             <Image
                                 src={item.src}
                                 alt={item.name}
