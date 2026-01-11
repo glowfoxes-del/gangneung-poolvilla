@@ -36,8 +36,25 @@ export async function calculatePriceAction(formData: any) {
   }
 }
 
+// Direct import for Service Role usage
+import { createClient as createSupabaseJsClient } from "@supabase/supabase-js";
+
 export async function createPendingBooking(data: any) {
+  // 1. Get Current User (for user_id) using standard client
   const supabase = await createClient();
+  const { data: { user } } = await supabase.auth.getUser();
+
+  // 2. Initialize Admin Client for INSERT (Bypass RLS)
+  const adminClient = createSupabaseJsClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.SUPABASE_SERVICE_ROLE_KEY!,
+    {
+      auth: {
+        autoRefreshToken: false,
+        persistSession: false,
+      },
+    }
+  );
 
   // 1. Validate Input
   const parsed = bookingSchema.safeParse({
@@ -68,10 +85,11 @@ export async function createPendingBooking(data: any) {
   // 4. Generate Lookup Code
   const lookupCode = Math.random().toString(36).substring(2, 8).toUpperCase();
 
-  // 5. Insert PENDING Booking
-  const { data: booking, error } = await supabase.from("bookings").insert({
+  // 5. Insert PENDING Booking (using adminClient)
+  const { data: booking, error } = await adminClient.from("bookings").insert({ // user_id handling added
+    user_id: user?.id || null, // Link to user if logged in
     room_id: roomId,
-    check_in: checkIn.toISOString(), // Postgres expects YYYY-MM-DD but ISO works for date type usually
+    check_in: checkIn.toISOString(),
     check_out: checkOut.toISOString(),
     nights: priceResult.nights,
     guests,
@@ -97,7 +115,7 @@ export async function createPendingBooking(data: any) {
     if (error.code === '23P01') { // Exclusion violation
       return { success: false, error: "해당 날짜에 이미 예약이 존재합니다." };
     }
-    return { success: false, error: "예약 생성 중 오류가 발생했습니다." };
+    return { success: false, error: error.message || "예약 생성 중 오류가 발생했습니다." };
   }
 
   return { success: true, bookingId: booking.id, amount: booking.total_amount, lookupCode };
