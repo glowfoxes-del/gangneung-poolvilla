@@ -35,7 +35,7 @@ export function Navigation() {
         <header
             className={cn(
                 "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-                isScrolled
+                isScrolled || pathname !== "/"
                     ? "bg-white/80 backdrop-blur-md shadow-sm py-4 border-b border-gray-100"
                     : "bg-transparent py-6"
             )}
@@ -46,7 +46,7 @@ export function Navigation() {
                     href="/"
                     className={cn(
                         "text-2xl font-bold tracking-tighter transition-colors",
-                        isScrolled ? "text-primary" : "text-white"
+                        isScrolled || pathname !== "/" ? "text-primary" : "text-white"
                     )}
                 >
                     {content.siteConfig.name}
@@ -60,7 +60,7 @@ export function Navigation() {
                             href={link.href}
                             className={cn(
                                 "text-sm font-medium transition-colors hover:text-primary/80",
-                                isScrolled ? "text-gray-900" : "text-white/90"
+                                isScrolled || pathname !== "/" ? "text-gray-900" : "text-white/90"
                             )}
                         >
                             {link.name}
@@ -68,7 +68,7 @@ export function Navigation() {
                     ))}
                     <Button
                         asChild
-                        variant={isScrolled ? "default" : "secondary"}
+                        variant={isScrolled || pathname !== "/" ? "default" : "secondary"}
                         className="rounded-full px-6"
                     >
                         <Link href="/booking">예약하기</Link>
@@ -83,7 +83,7 @@ export function Navigation() {
                             size="icon"
                             className={cn(
                                 "md:hidden",
-                                isScrolled ? "text-gray-900" : "text-white"
+                                isScrolled || pathname !== "/" ? "text-gray-900" : "text-white"
                             )}
                         >
                             <Menu className="h-6 w-6" />

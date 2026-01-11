@@ -50,12 +50,12 @@ export function Location() {
                         </div>
 
                         <div className="flex gap-4">
-                            <Button asChild variant="outline" className="border-white/20 text-white hover:bg-white/10 hover:text-white">
+                            <Button asChild variant="outline" className="bg-transparent border-white/20 text-white hover:bg-white hover:text-gray-900 transition-colors">
                                 <a href={`https://map.naver.com/v5/search/${encodeURIComponent(address)}`} target="_blank" rel="noopener noreferrer">
                                     네이버 지도
                                 </a>
                             </Button>
-                            <Button asChild variant="outline" className="border-white/20 text-white hover:bg-white/10 hover:text-white">
+                            <Button asChild variant="outline" className="bg-transparent border-white/20 text-white hover:bg-white hover:text-gray-900 transition-colors">
                                 <a href={`https://map.kakao.com/link/search/${encodeURIComponent(address)}`} target="_blank" rel="noopener noreferrer">
                                     카카오맵
                                 </a>

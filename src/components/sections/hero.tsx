@@ -25,10 +25,10 @@ export function Hero() {
                 </p>
 
                 <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in-up delay-200">
-                    <Button asChild size="lg" className="rounded-full px-8 text-lg h-14 bg-primary hover:bg-primary/90 text-white border-0">
+                    <Button asChild size="lg" className="rounded-full px-8 text-lg h-14 bg-primary hover:bg-primary/90 hover:scale-105 transition-all duration-300 text-white border-0 shadow-lg">
                         <Link href="/booking">실시간 예약하기</Link>
                     </Button>
-                    <Button asChild size="lg" variant="outline" className="rounded-full px-8 text-lg h-14 bg-white/10 hover:bg-white/20 text-white border-white/50 backdrop-blur-sm">
+                    <Button asChild size="lg" className="rounded-full px-8 text-lg h-14 bg-white text-primary hover:bg-gray-100 transition-all border-0 shadow-lg">
                         <Link href="/rooms">객실 둘러보기</Link>
                     </Button>
                 </div>

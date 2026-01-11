@@ -46,9 +46,9 @@ export function RoomPreview() {
                                     style={{ backgroundImage: `url('${room.images[0]}')` }} // Note: These are local paths from content.ts
                                 />
                                 {/* Fallback for dev if image missing */}
-                                <div className="absolute inset-0 flex items-center justify-center bg-gray-200 text-gray-400 text-xs">
-                                    {room.images[0]}
-                                </div>
+                                {
+                                    /* Fallback for dev if image missing - Removed to show real image */
+                                }
                                 <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-gray-900">
                                     ₩{room.basePrice.toLocaleString()}~
                                 </div>
