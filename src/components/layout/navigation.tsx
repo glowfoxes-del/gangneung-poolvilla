@@ -36,8 +36,8 @@ export function Navigation() {
             className={cn(
                 "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
                 isScrolled || pathname !== "/"
-                    ? "bg-white/80 backdrop-blur-md shadow-sm py-4 border-b border-gray-100"
-                    : "bg-transparent py-6"
+                    ? "bg-white/80 backdrop-blur-md shadow-sm py-4 border-b border-gray-100 pr-[var(--removed-body-scroll-bar-size)]"
+                    : "bg-transparent py-6 pr-[var(--removed-body-scroll-bar-size)]"
             )}
         >
             <div className="container mx-auto px-4 flex items-center justify-between">

@@ -205,6 +205,7 @@ export function BookingForm() {
                                                     <FormControl>
                                                         <Button
                                                             variant={"outline"}
+                                                            disabled={!watchRoomId} // Disable if no room
                                                             className={cn(
                                                                 "w-full pl-3 text-left font-normal",
                                                                 !field.value && "text-muted-foreground"
@@ -220,7 +221,7 @@ export function BookingForm() {
                                                                     format(field.value.from, "PPP", { locale: ko })
                                                                 )
                                                             ) : (
-                                                                <span>날짜를 선택해주세요</span>
+                                                                <span>{watchRoomId ? "날짜를 선택해주세요" : "객실을 먼저 선택해주세요"}</span>
                                                             )}
                                                             <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
                                                         </Button>
@@ -241,11 +242,6 @@ export function BookingForm() {
                                                             size="sm"
                                                             className="w-full"
                                                             onClick={() => {
-                                                                // The popover close is handled by the trigger's internal state usually, 
-                                                                // but Shadcn Popover doesn't expose setOpen easily without controlling it.
-                                                                // We need to control the popover state to close it on button click.
-                                                                // However, for this replace_file_content, I'll first add the button.
-                                                                // See subsequent edit for state control.
                                                                 document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' }));
                                                             }}
                                                         >
@@ -272,6 +268,7 @@ export function BookingForm() {
                                             <Select
                                                 onValueChange={(val) => field.onChange(Number(val))}
                                                 defaultValue={String(field.value)}
+                                                disabled={!watchRoomId} // Disable if no room
                                             >
                                                 <FormControl>
                                                     <SelectTrigger>
@@ -336,6 +333,7 @@ export function BookingForm() {
                                             <FormItem>
                                                 <div className="mb-4">
                                                     <FormLabel className="text-base">추가 옵션</FormLabel>
+                                                    {!watchRoomId && <span className="text-xs text-red-500 ml-2">(객실을 먼저 선택해주세요)</span>}
                                                     <FormDescription>
                                                         원하시는 추가 옵션을 선택해주세요.
                                                     </FormDescription>
@@ -353,6 +351,7 @@ export function BookingForm() {
                                                                 >
                                                                     <FormControl>
                                                                         <Checkbox
+                                                                            disabled={!watchRoomId} // Disable if no room
                                                                             checked={field.value?.includes(item.id)}
                                                                             onCheckedChange={(checked) => {
                                                                                 return checked
