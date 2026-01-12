@@ -236,6 +236,22 @@ export function BookingForm() {
                                                         }
                                                         initialFocus
                                                     />
+                                                    <div className="p-3 border-t flex justify-end">
+                                                        <Button
+                                                            size="sm"
+                                                            className="w-full"
+                                                            onClick={() => {
+                                                                // The popover close is handled by the trigger's internal state usually, 
+                                                                // but Shadcn Popover doesn't expose setOpen easily without controlling it.
+                                                                // We need to control the popover state to close it on button click.
+                                                                // However, for this replace_file_content, I'll first add the button.
+                                                                // See subsequent edit for state control.
+                                                                document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' }));
+                                                            }}
+                                                        >
+                                                            확인
+                                                        </Button>
+                                                    </div>
                                                 </PopoverContent>
                                             </Popover>
                                             <FormDescription>
