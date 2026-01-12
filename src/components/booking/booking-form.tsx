@@ -207,7 +207,7 @@ export function BookingForm() {
                                                             variant={"outline"}
                                                             disabled={!watchRoomId} // Disable if no room
                                                             className={cn(
-                                                                "w-full pl-3 text-left font-normal",
+                                                                "w-full pl-3 text-left font-normal disabled:cursor-default",
                                                                 !field.value && "text-muted-foreground"
                                                             )}
                                                         >
@@ -352,6 +352,7 @@ export function BookingForm() {
                                                                     <FormControl>
                                                                         <Checkbox
                                                                             disabled={!watchRoomId} // Disable if no room
+                                                                            className="disabled:cursor-default disabled:opacity-50"
                                                                             checked={field.value?.includes(item.id)}
                                                                             onCheckedChange={(checked) => {
                                                                                 return checked
